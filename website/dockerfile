@@ -29,7 +29,7 @@ COPY . .
 RUN python manage.py collectstatic --noinput
 
 # Expose port (Coolify will map this)
-EXPOSE 8000
+EXPOSE 8001
 
 # Start app with Gunicorn
-CMD ["gunicorn", "website:application", "--bind", "0.0.0.0:8000", "--workers=3"]
+CMD ["gunicorn", "website:application", "--bind", "0.0.0.0:8001", "--workers=3"]
