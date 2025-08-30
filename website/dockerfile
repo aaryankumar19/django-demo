@@ -32,5 +32,6 @@ RUN python manage.py collectstatic --noinput
 EXPOSE 8001
 
 # Start app with Gunicorn
-# CMD ["gunicorn", "website:application", "--bind", "0.0.0.0:8001", "--workers=3"]
-RUN python manage.py runserver
+CMD ["gunicorn", "website.wsgi:application", "--bind", "0.0.0.0:8001", "--workers=3"]
+
+
