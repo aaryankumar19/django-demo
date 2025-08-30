@@ -4,7 +4,7 @@ FROM python:3.11-slim
 # Set environment vars
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    DJANGO_SETTINGS_MODULE=your_project.settings \
+    DJANGO_SETTINGS_MODULE=website.settings \
     PATH="/home/app/.local/bin:$PATH"
 
 # Create working directory
