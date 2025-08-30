@@ -1,0 +1,5 @@
+/env
+/website/db.sqlite3
+/website/.env.production
+/wesbite/.env
+website/.env

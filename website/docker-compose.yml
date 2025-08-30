@@ -1,0 +1,13 @@
+# docker-compose.yml
+services:
+  web:
+    build: .
+    container_name: django_web
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app          # hot-reload: your code edits appear instantly
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=1
+    # If you later add a DB container, you can add depends_on here

@@ -1,0 +1,35 @@
+# syntax=docker/dockerfile:1
+FROM python:3.11-slim
+
+# Set environment vars
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    DJANGO_SETTINGS_MODULE=your_project.settings \
+    PATH="/home/app/.local/bin:$PATH"
+
+# Create working directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy project files
+COPY . .
+
+# Run migrations and collectstatic on container start (optional)
+# You can also handle this with Coolify deploy hooks
+RUN python manage.py collectstatic --noinput
+
+# Expose port (Coolify will map this)
+EXPOSE 8000
+
+# Start app with Gunicorn
+CMD ["gunicorn", "website:application", "--bind", "0.0.0.0:8000", "--workers=3"]
