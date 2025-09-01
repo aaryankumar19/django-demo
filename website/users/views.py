@@ -319,5 +319,3 @@ def get_user_profile_view(request):
             "message": "Unexpected error",
             "details": str(e)
         }, status=500)
-    
-
